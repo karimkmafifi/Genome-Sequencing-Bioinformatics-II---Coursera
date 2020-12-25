@@ -1,0 +1,42 @@
+-Based on the above definition of N50, define N75.
+It is a statistic that can also be used to measure the quality of an assembly. It is the maximal contig length for which contigs greater than or equal to that length comprise at least 75% of the total length of contigs. For example for the problem below, If we order the values in descending order: 200, 100, 80, 60, 60, 30, 30, 20, 20. We will keep adding number from left to right and divide them by the sum of lengths of contigs (600) until reaching 75% or more. (200+100+80+60+60)/(200+100+80+60+60+30+30+20+20) = 500/600 = 83.3% Which will be 60.
+
+-Compute N50 and N75 for the nine contigs with the following lengths: [20, 20, 30, 30, 60, 60, 80, 100, 200]
+N50 = 100
+N75 = 60
+
+-Say that we know that the genome length is 1000. What is NG50?
+NG50 = 60 (200+100+80+60+60)
+
+-If the contig in our dataset of length 100 had a misassembly breakpoint in the middle of it, what would be the value of NGA50?
+New Contigs = [200, 80, 60, 60, 50, 50, 30, 30, 20, 20]
+NGA50: 50 (200+80+60+60+50+50)
+
+-Based on the definition of scaffolds, what information could we use to construct scaffolds from contigs? Justify your answer.
+We can use base pairs to assist us in determining the scaffolds. If base pair overlap to different contigs, we can therefore know that a certain contig is after a contig in the genome. The length between the base pairs is also known in advance which can assist us in determining the gaps between contigs.
+
+-First, fill in the 9 missing values in the following 3 x 3 table (QUAST):
+k = 25, N50 = 59,595, #long contigs = 306,  total length of long contigs = 11,747,274
+k = 55, N50 = 159,616, #long contigs = 130,  total length of long contigs = 13,606,970
+k = 85, N50 = 188,896, #long contigs = 127,  total length of long contigs = 13,557,708
+
+-Which assembly performed the best in terms of each of these statistics? Justify your answer.Why do you think that the value you chose performed the best?
+k = 85 because it has fewer long contigs, a very similar total length of long contigs and a high N50 value.
+
+-(Multiple choice) When you increase the length of k-mers, the de Bruijn graph ____________.
+C) Becomes less tangled
+Because there will be less branching than when using shorter reads. When finding overlaps between k-mers, there will be less possible candidates.
+
+-Answer the following two questions using the QUAST reports.
+1. How many misassemblies were there?
+2. How significant is the effect of misassemblies on the resulting assembly?
+1- 25: 23, 55: 27, 85: 29
+2- It is huge in the case of 55 and 85 where the Misassembled contigs length is above 1,588,048
+
+1. What are NG50 and NGA50 for the QUAST run?
+2. How do they compare with the value of N50 that you previously calculated? Why?
+1-
+k = 25, N50 = 59,595, NG50 = 77,760, NGA50  = 35,824
+k = 55, N50 = 159,616, NG50 = 176,512, NGA50  = 92,194
+k = 85, N50 = 188,896, NG50 = 202,267, NGA50  = 87,161
+2- The NG50 is usually higher while the NGA50 is usually lower. The reason is that NG50 requires more contigs to achieve 50% from the whole genome length known while the NGA50 is usually smaller due to the breakdown of contigs.
